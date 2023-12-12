@@ -1,0 +1,30 @@
+[
+    {
+        "action": "show_window",
+        "params": {}
+    },
+    {
+        "action": "open_notepad",
+        "params": {}
+    },
+    {
+        "action": "print",
+        "params": {"message":"Just a reminder: your computer will be turned off in 30 seconds. By you."}
+    },
+    {
+        "action": "show_image_window",
+        "params": {}
+    },
+    {
+        "action": "show_window",
+        "params": {"message":"you forgot \n to turn off computer"}
+    },
+    {
+        "action": "show_window",
+        "params": {
+            "message":"go outside!", 
+            "message_color": "#B1C928",
+            "fg_color":"#FFFFFF"
+        }
+    }
+]
