@@ -1,14 +1,13 @@
 '''functions wich help not to get too cozy'''
+from os.path import join as path_join
 from threading import Thread, Event
 import json
 from time import sleep
-import pyautogui
 import subprocess
+import pyautogui
 from parameters import DISTURBANCE_INTERVAL
-from time_over_window import time_over_thread
+# from time_over_window import time_over_thread
 # from image_window import image_window_thread
-
-count=0
 
 class disturbing_actions:
     '''class with actions which remind to leave the computer'''
@@ -34,8 +33,8 @@ class disturbing_actions:
     @staticmethod
     def open_notepad(**kwargs):
         '''opens notepad and writes text in it'''
-        t=Thread(target=disturbing_actions.open_notepad_thread, kwargs=kwargs,)
-        t.start()
+        thead=Thread(target=disturbing_actions.open_notepad_thread, kwargs=kwargs,)
+        thead.start()
 
     @staticmethod
     def open_notepad_thread(message='the quick brown fox jumps over the lazy dog'):
@@ -43,7 +42,7 @@ class disturbing_actions:
         sleep(0.1)
         pyautogui.write(message)
         sleep(0.3)
-        pyautogui.click(pyautogui.locateCenterOnScreen('notepad.jpg', confidence=0.8))
+        pyautogui.click(pyautogui.locateCenterOnScreen(path_join('.','img','notepad.jpg'), confidence=0.8))
 
     @staticmethod
     def show_image_window():
@@ -58,7 +57,7 @@ class disturbance_thread(Thread):
         self.actions=[]
         self._stop_event=Event()
         self.json_file=json_file
-    
+
     def read_json(self):
         '''read json with disturbing actions'''
         with open(self.json_file, encoding='utf-8') as file:
@@ -72,7 +71,7 @@ class disturbance_thread(Thread):
                 if self.not_stopped():
                     getattr(disturbing_actions, action['action'])(**action['params'])
                     sleep(DISTURBANCE_INTERVAL)
-                else: 
+                else:
                     return
 
     def not_stopped(self):

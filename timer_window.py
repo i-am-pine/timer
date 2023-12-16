@@ -1,6 +1,7 @@
 '''Timer window module'''
 
 import time
+from os.path import join as path_join
 import customtkinter as tk
 import pyautogui
 from time_checker import time_checker
@@ -18,7 +19,7 @@ class timer_window(tk.CTk):
         '''
         super().__init__()
         self.start_time=0                       # time from when timer starts count
-        self.stop_time=0                        # uses to substract time during when timer was stopped from the main count
+        self.stop_time=0                        # uses to substract time during which timer was stopped from the main count
         self.buffer=0                           # counter for time when timer didn't work
         self.time_over=False                    # true if time is more then MAX_TIME
         self.update_function=self.update_time   # function to update timer label
@@ -26,8 +27,8 @@ class timer_window(tk.CTk):
         self.disturbance_thread=None
         self.start_count()
         # self.start_checker()
-        
-        self.iconbitmap('icon.ico')
+
+        self.iconbitmap(path_join('.','img','icon.ico'))
 
         width, _ = pyautogui.size()
         self.geometry_string=f'+{width-270}+0'
@@ -46,7 +47,7 @@ class timer_window(tk.CTk):
         self.label.grid(column=0, row=0, columnspan=5)
         self.label.after(1000, self.update_time)
 
-        buttonClose=tk.CTkButton(frame, text='x', width=10, height=10, 
+        buttonClose=tk.CTkButton(frame, text='x', width=10, height=10,
                                  command=lambda:[self.time_checker.stop(), self.destroy()])
         buttonClose.grid(column=5, row=0, sticky='ne')
 
@@ -62,12 +63,12 @@ class timer_window(tk.CTk):
         '''Creates thread to check idle time, 
             timer stops when inactivity time > idle_time 
         '''
-        if self.time_checker is not None: 
+        if self.time_checker is not None:
             self.time_checker.stop()
         self.time_checker=time_checker()
         self.time_checker.start()
         self.check_inactivity_time()
-    
+
     def check_inactivity_time(self):
         '''checks if time_checker thread is alive, 
         if not, stops count until user starts it'''
@@ -86,7 +87,7 @@ class timer_window(tk.CTk):
         if self.start_time==0:
             self.start_time = time.time()
         self.update_function=self.update_time
-    
+
     def stop_count(self):
         '''Function for button Stop'''
         self.time_checker.stop()
@@ -124,7 +125,7 @@ class timer_window(tk.CTk):
         self.overrideredirect(True)
         self.deiconify()
         self.focus_force()
-        self.geometry(self.geometry_string)        
+        self.geometry(self.geometry_string)
 
     def hide_window(self, _):
         '''When timer window is inactive it goes to task bar'''

@@ -1,5 +1,6 @@
 '''window with lion image and moving text'''
 from threading import Thread
+from os.path import join as path_join
 import customtkinter as tk
 from PIL import Image, ImageTk
 
@@ -10,11 +11,11 @@ class image_window(tk.CTk):
         # self.parent=parent
         tk.set_appearance_mode('System')
         tk.set_default_color_theme('dark-blue')
-        
+
         self.overrideredirect(True)
         self.attributes('-topmost', True)
 
-        self.image=Image.open('lion.jpg')
+        self.image=Image.open(path_join('.','img','lion.jpg'))
         self.image_tk=ImageTk.PhotoImage(self.image)
         self.maxwidth, self.maxheight=self.image.size
 
@@ -34,6 +35,7 @@ class image_window(tk.CTk):
         self.after(10, self.resize)
 
     def image_click(self, _):
+        '''closes window by clicking on STOP IT text'''
         self.canvas.delete('all')
         self.image.close()
         self.destroy()
