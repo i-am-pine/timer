@@ -1,4 +1,4 @@
-'''file to start all of this'''
+'''file to start all this'''
 from timer_window import timer_window
 
 if __name__ =='__main__':

@@ -1,5 +1,6 @@
 '''functions wich help not to get too cozy'''
 from os.path import join as path_join
+from sys import executable as actual_python
 from threading import Thread, Event
 import json
 from time import sleep
@@ -28,7 +29,7 @@ class disturbing_actions:
         if 'message' in kwargs: params+=' -m "'+kwargs['message']+'"'
         if 'message_color' in kwargs: params+=' -c "'+kwargs['message_color']+'"'
         if 'fg_color' in kwargs: params+=' -f "'+kwargs['fg_color']+'"'
-        Thread(target=subprocess.call, args=['python time_over_window.py'+params]).start()
+        Thread(target=subprocess.call, args=[actual_python+' time_over_window.py'+params]).start()
 
     @staticmethod
     def open_notepad(**kwargs):
@@ -47,7 +48,7 @@ class disturbing_actions:
     @staticmethod
     def show_image_window():
         '''shows image with lion'''
-        Thread(target=subprocess.call, args=['python image_window.py']).start()
+        Thread(target=subprocess.call, args=[actual_python+' image_window.py']).start()
 
 
 class disturbance_thread(Thread):
@@ -86,6 +87,7 @@ class disturbance_thread(Thread):
 
 #for tests
 if __name__=='__main__':
+    print(actual_python)
     try:
         disturbance=disturbance_thread()
         disturbance.start()

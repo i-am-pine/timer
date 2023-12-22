@@ -4,5 +4,5 @@
     DISTURBANCE_INTERVAL - intervals between actions described in disturbing_actions.json
 '''
 IDLE_TIME = 300
-MAX_TIME = 1800 #20 
+MAX_TIME = 28800 #1800 #20 
 DISTURBANCE_INTERVAL = 300 #10 #600
