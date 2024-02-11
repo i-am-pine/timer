@@ -1,7 +1,9 @@
+'''window to show overtime after the timer is closed'''
 from threading import Thread
 import customtkinter as tk
 
 class overtime_window(tk.CTk):
+    '''Window whith a string text with overtime and buttons Copy (to copy that string) and Close'''
     def __init__(self, message="you've overworked"):
         super().__init__()
         tk.set_appearance_mode('System')
@@ -31,6 +33,7 @@ class overtime_window(tk.CTk):
         self.attributes('-topmost', True)
 
 class overtime_thread(Thread):
+    '''thread to start this window'''
     def __init__(self, message = "you've overworked"):
         super().__init__()
         self.message=message
@@ -39,6 +42,7 @@ class overtime_thread(Thread):
         window=overtime_window(self.message)
         window.mainloop()
 
+'''for test purposes'''
 if __name__=='__main__':
     # overtime_window().mainloop()
     overtime_thread().start()
