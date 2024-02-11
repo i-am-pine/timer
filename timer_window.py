@@ -135,7 +135,7 @@ class timer_window(tk.CTk):
 
     def move_window(self, event):
         '''uses to move window on the screen'''
-        window.geometry(f'+{event.x_root}+{event.y_root}')
+        self.geometry(f'+{event.x_root}+{event.y_root}')
 
     def start_disturb(self):
         '''starts disturb you when your time is over'''
